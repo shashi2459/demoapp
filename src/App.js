@@ -50,11 +50,11 @@ const App = (props) => {
                 {provider.map((provider) => (
                   <a key={provider} href={`/.auth/login/${provider}?post_login_redirect_uri=${redirect}`}>
                     {
-                      provider == 'aad' ? 'Azure AD'
+                      provider === 'aad' ? 'Azure AD'
                         :
-                        provider == 'twitter' ? 'Twitter'
+                        provider === 'twitter' ? 'Twitter'
                           :
-                          provider == 'github' ? 'Github' : ''
+                          provider === 'github' ? 'Github' : ''
                     }
                   </a>
                 ))}
