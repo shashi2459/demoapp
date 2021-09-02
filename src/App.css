@@ -5,6 +5,16 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+  align-items: flex-start;
+}
+
+.App-body {
+  height: 50px;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  /* background-color: #303746; */
+  align-items: center;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -15,13 +25,17 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  max-height: 50;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.App-header-text {
+  align-self: center;
+  font-size: calc(15px + 2vmin);
 }
 
 .App-link {
