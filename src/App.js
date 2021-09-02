@@ -43,7 +43,7 @@ const App = (props) => {
             {props.children}
           </nav>
           <div className="menu-list auth">
-            {userInfo ? 
+            {!userInfo ? 
               <>
                 <p className="menu-label">Login Using</p>
 
@@ -61,7 +61,7 @@ const App = (props) => {
               </>
             : <></>
               }
-            {!userInfo && (
+            {userInfo && (
               <a href={`/.auth/logout?post_logout_redirect_uri=${redirect}`}>
                 Logout
               </a>
