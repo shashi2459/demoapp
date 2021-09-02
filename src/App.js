@@ -6,7 +6,7 @@ import './styles.scss';
 
 const App = (props) => {
 
-  const providers = ['twitter', 'github', 'aad'];
+  const providers = ['github', 'aad']; //'twitter'
   const redirect = window.location.pathname;
   const [userInfo, setUserInfo] = useState();
 
@@ -20,6 +20,7 @@ const App = (props) => {
     try {
       const response = await fetch('/.auth/me');
       const payload = await response.json();
+      console.log('Payload', payload)
       const { clientPrincipal } = payload;
       console.log('User info', clientPrincipal)
       localStorage.setItem('userInfo', clientPrincipal)
@@ -40,7 +41,7 @@ const App = (props) => {
       <div className="section columns">
         <div className="column is-2">
           <nav className="menu">
-            <p className="menu-label">Login via</p>
+            {/* <p className="menu-label">Login via</p> */}
             {props.children}
           </nav>
           <div className="menu-list auth">
@@ -56,9 +57,16 @@ const App = (props) => {
             )}
           </div>
         </div>
-        <div className="column is-6">
-          Hello User, Welcome back
-        </div>
+        {!userInfo && (
+          <div className="column is-6">
+            Hello Guest, please login!
+          </div>
+        )}
+        {userInfo && (
+          <div className="column is-6">
+            Hello User, Welcome to SWA!
+          </div>
+        )}
       </div>
     </div>
   );
