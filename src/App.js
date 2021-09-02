@@ -21,6 +21,8 @@ const App = (props) => {
       const response = await fetch('/.auth/me');
       const payload = await response.json();
       const { clientPrincipal } = payload;
+      console.log('User info', clientPrincipal)
+      localStorage.setItem('userInfo', clientPrincipal)
       return clientPrincipal;
     } catch (error) {
       console.error('No profile could be found');
@@ -35,40 +37,27 @@ const App = (props) => {
         <div className="App-header-text">Static Web App</div>
       </header>
 
-      {/* <div className="App-body">
-        <p>
-          <a href="/.auth/login/github">Login</a>
-        </p>
-
-        <p>
-          <a href="/.auth/logout">Log out</a>
-        </p>
-      </div> */}
-
-      <div className="column is-2">
-        <nav className="menu">
-          <p className="menu-label">Login via</p>
-          <ul className="menu-list">
-            {/* <NavLink to="/products" activeClassName="active-link">
-              Products
-            </NavLink>
-            <NavLink to="/about" activeClassName="active-link">
-              About
-            </NavLink> */}
-          </ul>
-          {props.children}
-        </nav>
-        <div className="menu-list auth">
-          {providers.map((provider) => (
-            <a key={provider} href={`/.auth/login/${provider}?post_login_redirect_uri=${redirect}`}>
-              {provider}
-            </a>
-          ))}
-          {userInfo && (
-            <a href={`/.auth/logout?post_logout_redirect_uri=${redirect}`}>
-              Logout
-            </a>
-          )}
+      <div className="section columns">
+        <div className="column is-2">
+          <nav className="menu">
+            <p className="menu-label">Login via</p>
+            {props.children}
+          </nav>
+          <div className="menu-list auth">
+            {!userInfo && providers.map((provider) => (
+              <a key={provider} href={`/.auth/login/${provider}?post_login_redirect_uri=${redirect}`}>
+                {provider}
+              </a>
+            ))}
+            {userInfo && (
+              <a href={`/.auth/logout?post_logout_redirect_uri=${redirect}`}>
+                Logout
+              </a>
+            )}
+          </div>
+        </div>
+        <div className="column is-6">
+          Hello User, Welcome back
         </div>
       </div>
     </div>
